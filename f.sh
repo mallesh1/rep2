@@ -1,4 +1,4 @@
 pwd
 whoami
-sudo apt update
-sudo apt install apache2
+sudo apt update -s
+sudo apt install apache2 -s
