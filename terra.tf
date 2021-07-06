@@ -64,12 +64,12 @@ resource "aws_key_pair" "eks" {
 }
 
     resource aws_instance "i1" {
-	    ami           = "ami-0567f647e75c7bc05"
-	    instance_type = "t2.micro"
-		   count =length(aws_subnet.sbn.*.id)
-	    subnet_id      = aws_subnet.sbn.*.id[count.index]
-	    vpc_security_group_ids = [aws_security_group.eks-sg.id]
-		key_name      = "eks"
+	ami           = "ami-0567f647e75c7bc05"
+	instance_type = "t2.micro"
+		   count =3
+    subnet_id      = aws_subnet.sbn.*.id[count.index]
+    vpc_security_group_ids = [aws_security_group.eks-sg.id]
+	key_name      = "eks"
 	
  }
  
