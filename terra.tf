@@ -4,7 +4,7 @@ variable "clsr" {
 }
 variable "az"{
   type = "list"
-  default = ["ap-southeast-1a","ap-southeast-1b","ap-southeast-1c"]
+  default = ["ap-southeast-2a","ap-southeast-2b","ap-southeast-2c"]
 }
 variable "cidr"{
   type = "list"
