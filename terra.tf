@@ -1,6 +1,4 @@
-variable "clsr" {
-  default = "terraform-eks-demo"
-  type    = "string"
+
 }
 variable "az"{
   type = "list"
@@ -47,7 +45,7 @@ resource aws_route_table_association "routatach" {
 
 resource aws_security_group "eks-sg" {
   name        = "eks-sg"
-  description = "Cluster communication with worker nodes"
+  description = "jenkis and ansible"
   vpc_id      = aws_vpc.vpc-1.id
 
   egress {
@@ -61,3 +59,18 @@ resource aws_security_group "eks-sg" {
     Name = "eks-sg"
   }
 }
+resource "aws_key_pair" "eks" {
+  key_name   = "eks"
+  public_key = file("./eks.sh") 
+}
+
+    resource aws_instance "i1" {
+	    ami           = "ami-0d058fe428540cd89"
+	    instance_type = "t2.micro"
+		   count =length(aws_subnet.sbn.*.id)
+	    subnet_id      = aws_subnet.sbn.*.id[count.index]
+	    vpc_security_group_ids = [aws_security_group.eks-sg.id]
+		key_name      = "eks"
+	
+ }
+ 
